@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MvcNetCorePaginacionRegistros.Models.Empleado>
+
+@{
+    int numPagina = 1;
+    int numRegistros = (int)ViewData["REGISTROS"];
+    ViewData["Title"] = "PaginarGrupoEmpleados";
+}
+
+<h1>Paginar Grupo Empleados</h1>
+
+<ul class="list-group list-group-horizontal">
+    @for (int i = 1; i <= numRegistros; i+=3 )
+    {
+        <li class="list-group-item">
+            <a asp-controller="Paginacion" asp-action="PaginarGrupoEmpleados" asp-route-posicion="@i">
+                @numPagina
+            </a>
+        </li>
+        numPagina++;
+    }
+</ul>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+               IdEmpleado
+            </th>
+            <th>
+                Apellido
+            </th>
+            <th>
+               Oficio
+            </th>
+            <th>
+                Salario
+            </th>
+            <th>
+                IdDepartamento
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.IdEmpleado
+            </td>
+            <td>
+                @item.Apellido
+            </td>
+            <td>
+                @item.Oficio
+            </td>
+            <td>
+                @item.Salario
+            </td>
+            <td>
+                @item.IdDepartamento
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

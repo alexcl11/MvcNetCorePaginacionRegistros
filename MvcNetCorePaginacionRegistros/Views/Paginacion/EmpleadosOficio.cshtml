@@ -1,0 +1,62 @@
+﻿@model List<Empleado>
+
+<h1>Empleados Oficio</h1>
+<br />
+<hr />
+<br />
+
+<form method="post">
+    <label>Introduzca oficio</label>
+    <input type="text" name="oficio" class="form-control"/>
+    <button class="btn btn-success">
+        Buscar por oficio
+    </button>
+</form>
+
+@{
+    int numRegistros = 0;
+    int numPagina = 0;
+    string oficio = "";
+    if (ViewData["REGISTROS"] != null)
+    {
+        numRegistros = (int)ViewData["REGISTROS"] ;
+        oficio = (string)ViewData["OFICIO"];
+    }
+}
+
+@if (Model != null)
+{    
+    <ul class="list-group list-group-horizontal">
+        @for (int i = 1; i <= numRegistros; i+=3)
+        {
+            <li class="list-group-item">
+                <a asp-controller="Paginacion" asp-action="EmpleadosOficio" 
+                    asp-route-oficio="@oficio"
+                    asp-route-posicion="@i">
+                    @numPagina
+                </a>
+            </li>
+            numPagina++;
+        }
+    </ul>
+
+    <table class="table table-bordered">
+        <thead>
+            <th>ID EMPLEADO</th>
+            <th>APELLIDO</th>
+            <th>OFICIO</th>
+            <th>SALARIO</th>
+        </thead>
+        <tbody>
+            @foreach (Empleado empleado in Model)
+            {
+                <tr>
+                    <td>@empleado.IdEmpleado</td>
+                    <td>@empleado.Apellido</td>
+                    <td>@empleado.Oficio</td>
+                    <td>@empleado.Salario €</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

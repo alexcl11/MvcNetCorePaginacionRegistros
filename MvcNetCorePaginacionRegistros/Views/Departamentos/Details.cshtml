@@ -1,0 +1,92 @@
+﻿@model DepartamentoEmpleados
+
+<h1>
+    Detalles Departamento
+</h1>
+<br />
+<hr />
+<br />
+
+@{
+    int numRegistros = 0;
+    int registro = 1;
+    int idDepartamento = 0;
+    if (ViewData["REGISTROS"] != null)
+    {
+        numRegistros = (int)ViewData["REGISTROS"];
+        idDepartamento = (int)ViewData["IDDEPARTAMENTO"];
+        registro = (int)ViewData["POSICION"];
+    }
+}
+@if (Model != null)
+{
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Nombre</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">ID DEPARTAMENTO: @Model.IdDepartamento</h6>
+            <h6 class="card-subtitle mb-2 text-body-secondary">LOCALIDAD: @Model.Localidad</h6>
+        </div>
+    </div>
+
+    <ul class="list-group list-group-horizontal">
+        
+            <li class="list-group-item">
+                <a asp-controller="Departamentos" asp-action="Details"
+                   asp-route-idDepartamento="@idDepartamento"
+                   asp-route-posicion="1">
+                    Primero
+                </a>
+            </li>
+
+            @if (registro != 1)
+            {
+                <li class="list-group-item">
+                    <a asp-controller="Departamentos" asp-action="Details"
+                       asp-route-idDepartamento="@idDepartamento"
+                       asp-route-posicion="@ViewData["ANTERIOR"]">
+                        Anterior
+                    </a>
+                </li>   
+            }
+            @if (registro != numRegistros)
+            {
+                <li class="list-group-item">
+                    <a asp-controller="Departamentos" asp-action="Details"
+                       asp-route-idDepartamento="@idDepartamento"
+                       asp-route-posicion="@ViewData["SIGUIENTE"]">
+                        Siguiente
+                    </a>
+                </li>
+            }
+            <li class="list-group-item">
+                <a asp-controller="Departamentos" asp-action="Details"
+                   asp-route-idDepartamento="@idDepartamento"
+                   asp-route-posicion="@numRegistros">
+                    Último
+                </a>
+            </li>
+        
+    </ul>
+
+    
+
+    <table class="table table-bordered">
+        <thead>
+        <th>ID EMPLEADO</th>
+        <th>APELLIDO</th>
+        <th>OFICIO</th>
+        <th>SALARIO</th>
+        </thead>
+        <tbody>
+            @foreach (Empleado empleado in Model.Empleados)
+            {
+                <tr>
+                    <td>@empleado.IdEmpleado</td>
+                    <td>@empleado.Apellido</td>
+                    <td>@empleado.Oficio</td>
+                    <td>@empleado.Salario €</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

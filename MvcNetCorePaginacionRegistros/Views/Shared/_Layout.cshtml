@@ -29,6 +29,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Paginacion" asp-action="GrupoVistaDepartamentos">Paginación Grupal</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Paginacion" asp-action="GrupoDepartamentos">Paginación Grupal Departamentos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Paginacion" asp-action="PaginarGrupoEmpleados">Paginación Grupal Empleados</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Paginacion" asp-action="EmpleadosOficio">Paginación Grupal Empleados Oficio</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Paginacion" asp-action="EmpleadosOficioOut">Paginación Grupal Empleados Oficio OUT</a>
+                        </li>
+                        @await Component.InvokeAsync("MenuDepartamentos")
                     </ul>
                 </div>
             </div>
